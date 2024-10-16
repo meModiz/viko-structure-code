@@ -1,0 +1,3 @@
+C:/Users/Modiz/Desktop/viko-code/10.16/cmake-build-debug/CMakeFiles/10_16.dir
+C:/Users/Modiz/Desktop/viko-code/10.16/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Modiz/Desktop/viko-code/10.16/cmake-build-debug/CMakeFiles/rebuild_cache.dir

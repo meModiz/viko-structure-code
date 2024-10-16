@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    /* 1;2 užduotis
+    // 1;2 užduotis
     int a,b,c,d; // studento pazymiai
     int s_vidurkis = 0; // studento vidurkis
     cin>>a>>b>>c>>d;
@@ -14,7 +14,7 @@ int main()
     }
     else if(s_vidurkis <= 5) {
         cout<<"Vidurkis neigiamas";
-    }*/
+    }
 
 
     // 3 užduotis
@@ -74,12 +74,12 @@ int main()
     }
     cout << total;*/
 
-    /* 6 uzduotis
+    // 6 uzduotis
     double indelis = 1000;
     for(int i = 0; i<10; i++) {
         indelis = 105*indelis/100;
     }
-    cout<<indelis;*/
+    cout<<indelis;
 
     /*  7 uzduotis
     for(int i = 1; i<=20; i++) {
