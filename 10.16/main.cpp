@@ -25,6 +25,7 @@ int main() {
 
     int stud[41];
     int repeatablePoints[11] = {0};
+    // { 0, 0 , 0 , 0, 0, 0, 0, 0, 0 }
     for(int i =0; i < 40; i++) {
         cin >> stud[i];
     }
