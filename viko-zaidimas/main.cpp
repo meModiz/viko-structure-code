@@ -92,6 +92,22 @@ int main() {
                 cout << "Didziausias dalyklis tarp skaiciaus " << sk1 << " ir " << sk2 << ", yra: " << didzDalyklis << endl;
                 break;
             }
+            case 3: {
+                StartGame();
+                break;
+            }
+            case 4: {
+                cout<<"Iveskite teigiam skaiciu: "<<endl;
+                int n;
+                cin>>n;
+                if(n > 0) {
+                    FizzBuzz(n);
+                }
+                else {
+                    cout<<"Skaicius neigiamas arba 0 :)"<<endl;//
+                }
+                break;
+            }
             case 5:
                 cout << "Programa baigia darba." << endl;
             break;
