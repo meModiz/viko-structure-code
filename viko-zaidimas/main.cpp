@@ -74,6 +74,24 @@ int main() {
         cin >> n;
 
         switch (n) {
+            case 1: {
+                bool arBalse = isBalse();
+                if (arBalse) {
+                    cout << "true" << endl;
+                } else {
+                    cout << "false" << endl;
+                }
+                break;
+            }
+            case 2: {
+                int sk1, sk2;
+                cout << "Iveskit du skaicius:" << endl;
+                cin >> sk1;
+                cin >> sk2;
+                int didzDalyklis = didDalyklis(sk1, sk2);
+                cout << "Didziausias dalyklis tarp skaiciaus " << sk1 << " ir " << sk2 << ", yra: " << didzDalyklis << endl;
+                break;
+            }
             case 5:
                 cout << "Programa baigia darba." << endl;
             break;
