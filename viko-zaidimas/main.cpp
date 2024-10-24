@@ -60,6 +60,9 @@ void FizzBuzz(int n) {
         else if(i % 5 == 0) {
             cout<<i<<": Buzz"<<endl;
         }
+        else {
+            cout<<i<<endl;
+        }
     }
 }
 int main() {
