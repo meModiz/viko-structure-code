@@ -52,13 +52,13 @@ void StartGame() {
 void FizzBuzz(int n) {
     for(int i = 1;i <= n;i++) {
         if(i % 3 == 0 && i % 5 == 0) {
-            cout<<"FizzBuzz"<<endl;
+            cout<<i<<": FizzBuzz"<<endl;
         }
         else if(i % 3 == 0) {
-            cout<<"Fizz"<<endl;
+            cout<<i<<": Fizz"<<endl;
         }
         else if(i % 5 == 0) {
-            cout<<"Buzz"<<endl;
+            cout<<i<<": Buzz"<<endl;
         }
     }
 }
@@ -68,8 +68,8 @@ int main() {
         cout << "1. Balses tikrinimas" << endl;
         cout << "2. Dvieju skaitmenu didziausias dalyklis" << endl;
         cout << "3. Random skaiciaus zaidimas" << endl;
-        cout << "4." << endl;
-        cout << "5. isejimas" << endl;
+        cout << "4. FizzBuz Zaidimas" << endl;
+        cout << "5. Isejimas" << endl;
         cout << "Pasirinkite viena is siu funkciju:" << endl;
         cin >> n;
 
