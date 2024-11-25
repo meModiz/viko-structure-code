@@ -6,13 +6,26 @@ using namespace std;
 
 const char Alphabet[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
+const int ASCII_MIN = 33, ASCII_MAX = 126;
+const int ASCII_RANGE = ASCII_MAX - ASCII_MIN + 1;
+
 void DecryptionWord(bool isAlphabet, char key[50], char EncryptedWord[50]) {
+
+    int key_len = strlen(key);
     int word_len = strlen(EncryptedWord);
+
+    // Rakto ilgis prilyginimas zodzio ilgiui (kartojasi raides)
+    char extended_key[50];
+    for (int i = 0; i < word_len; i++) {
+        extended_key[i] = key[i % key_len];
+    }
+    // Formatavimas teksto
+    extended_key[word_len] = '\0';
     char new_word[50];
     for(int i = 0; i < word_len; i++) {
         // Paiimam po viena raidę iš šifruojamo žodžio ir rakto
-        char currentLetter1 = toupper(key[i]);
-        char currentLetter2 = toupper(EncryptedWord[i]);
+        char currentLetter1 = extended_key[i];
+        char currentLetter2 = EncryptedWord[i];
 
         // Naujo žodžio raidės skaičiavimo indexai
         int currentLetterIndex1 = 0;
@@ -23,25 +36,29 @@ void DecryptionWord(bool isAlphabet, char key[50], char EncryptedWord[50]) {
             // Sukam ciklą per abecelę
             for(int j = 0; j < sizeof(Alphabet); j++) {
                 // Surandam indexus raidžių (rakto ir šifruojamo žodžio)
-                if(Alphabet[j] == currentLetter1) {
+                if(Alphabet[j] == toupper(currentLetter1)) {
                     currentLetterIndex1 = j;
                 }
-                if(Alphabet[j] == currentLetter2) {
+                if(Alphabet[j] == toupper(currentLetter2)) {
                     currentLetterIndex2 = j;
                 }
             }
             // uzsifruotas tekstas - raktas + Dydis abeceles % dydis abecles
             newLetterIndex = (currentLetterIndex2 - currentLetterIndex1 + sizeof(Alphabet)) % sizeof(Alphabet);
+            new_word[i] = Alphabet[newLetterIndex];
         }
         else {
             // Surandam indexus raidžių (rakto ir šifruojamo žodžio) pagal ascii
-            currentLetterIndex1 = int(currentLetter1);
-            currentLetterIndex2 = int(currentLetter2);
-            newLetterIndex = (currentLetterIndex2 - currentLetterIndex1 + 128) % 128;
+            currentLetterIndex1 = int(currentLetter1); // raktas
+            currentLetterIndex2 = int(currentLetter2); // zodis
+
+            //newLetterIndex = (currentLetterIndex2 - currentLetterIndex1 - 32 + 95) % 95 + 32;
+            newLetterIndex = ((currentLetterIndex2 - ASCII_MIN) - (currentLetterIndex1 - ASCII_MIN) + ASCII_RANGE) % ASCII_RANGE + ASCII_MIN;
+            new_word[i] = char(newLetterIndex);
         }
-        // Naudojam formulę (Indexas rakto + Indexas Sifruojamo zodzio) ir padalinta is abeceles ir gauta liekana
-        new_word[i] = Alphabet[newLetterIndex];
     }
+    // Formatavimas
+    new_word[word_len] = '\0';
     cout<<"Desifruotas zodis: "<<new_word<<endl;
     cout<<endl;
 }
@@ -61,8 +78,8 @@ void EncryptWord(bool isAlphabet, char key[50], char nonEncryptedWord[50]) {
     char new_word[50];
     for(int i = 0; i < word_len; i++) {
         // Paiimam po viena raidę iš šifruojamo žodžio ir rakto
-        char currentLetter1 = toupper(extended_key[i]);
-        char currentLetter2 = toupper(nonEncryptedWord[i]);
+        char currentLetter1 = extended_key[i];
+        char currentLetter2 = nonEncryptedWord[i];
 
         // Naujo žodžio raidės skaičiavimo indexai
         int currentLetterIndex1 = 0;
@@ -73,26 +90,28 @@ void EncryptWord(bool isAlphabet, char key[50], char nonEncryptedWord[50]) {
             // Sukam ciklą per abecelę
             for(int j = 0; j < sizeof(Alphabet); j++) {
                 // Surandam indexus raidžių (rakto ir šifruojamo žodžio)
-                if(Alphabet[j] == currentLetter1) {
+                if(Alphabet[j] == toupper(currentLetter1)) {
                     currentLetterIndex1 = j;
                 }
-                if(Alphabet[j] == currentLetter2) {
+                if(Alphabet[j] == toupper(currentLetter2)) {
                     currentLetterIndex2 = j;
                 }
             }
             // Naudojam formulę (Indexas rakto + Indexas Sifruojamo zodzio) ir padalinta is abeceles ir gauta liekana
             newLetterIndex = (currentLetterIndex1 + currentLetterIndex2) % sizeof(Alphabet);
+            new_word[i] = Alphabet[newLetterIndex];
         }
         else {
             // Surandam indexus raidžių (rakto ir šifruojamo žodžio) pagal ascii
-            currentLetterIndex1 = int(currentLetter1);
-            currentLetterIndex2 = int(currentLetter2);
-            newLetterIndex = (currentLetterIndex1 + currentLetterIndex2) % 128;
+            currentLetterIndex1 = int(currentLetter1); // raktas
+            currentLetterIndex2 = int(currentLetter2); // zodis
+            //newLetterIndex = ((currentLetterIndex1 + currentLetterIndex2 - 32) % 95 + 32);
+            newLetterIndex = ((currentLetterIndex2 - ASCII_MIN) + (currentLetterIndex1 - ASCII_MIN)) % ASCII_RANGE + ASCII_MIN;
+            new_word[i] = char(newLetterIndex);
         }
-        new_word[i] = Alphabet[newLetterIndex];
     }
     // Formatavimas
-    new_word[word_len] = '\0';  // Explicitly add the null terminator
+    new_word[word_len] = '\0';
     cout<<"Uzsifruotas zodis: "<<new_word<<endl;
     cout<<endl;
 }
